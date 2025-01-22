@@ -1,0 +1,11 @@
+venv
+log
+data/.env
+data/cleanup_files.sh
+data/swap_data*
+data/contract_data*
+data/demand_ratio
+data/pool_data
+data/token_data
+data/mev_data*
+sim/data/
