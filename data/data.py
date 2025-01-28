@@ -4,6 +4,7 @@ import requests
 import os
 import time
 import logging
+import sys 
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -810,23 +811,28 @@ lated over a swap window of size s = {std_samples}.''')
     print(f"saved to {FIGURE_FOLDER}/paper_plot_data.png")
 
 if __name__ == "__main__":
-    # get_top_tokens()
-    # download_create_pool_topic()
-    # parse_create_pool_topic()
+    if len(sys.argv) != 2:
+        print("enter data directory path")
+    data_dir = sys.argv[1]
+    if data_dir != "demand_ratio_paper":
 
-    # download_mev_dataset()
+        get_top_tokens()
+        download_create_pool_topic()
+        parse_create_pool_topic()
 
-    # download_swap_topic()
-    # parse_swap_topic()
-    # combine_contract_swaps()
+        download_mev_dataset()
 
-    # calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
-    # calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=None, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
-    # calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=False, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
+        download_swap_topic()
+        parse_swap_topic()
+        combine_contract_swaps()
+
+        calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER=data_dir)
+        calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=None, DEMAND_RATIO_DATA_FOLDER=data_dir)
+        calculate_demand_ratio(std_samples=[100,500,1000,7000], filter_nonatomic=False, DEMAND_RATIO_DATA_FOLDER=data_dir)
 
 
-    plot_demand_ratio_all_pools(std_samples=500,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
-    plot_demand_ratio_all_pools(std_samples=1000,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
-    plot_demand_ratio_all_pools(std_samples=7000,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
+    plot_demand_ratio_all_pools(std_samples=500,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER=data_dir)
+    plot_demand_ratio_all_pools(std_samples=1000,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER=data_dir)
+    plot_demand_ratio_all_pools(std_samples=7000,filter_nonatomic=True, DEMAND_RATIO_DATA_FOLDER=data_dir)
 
-    make_paper_plots(DEMAND_RATIO_DATA_FOLDER="demand_ratio_paper")
+    make_paper_plots(DEMAND_RATIO_DATA_FOLDER=data_dir)
